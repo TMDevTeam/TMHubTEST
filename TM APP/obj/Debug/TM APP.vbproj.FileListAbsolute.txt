@@ -23,3 +23,28 @@ J:\Brick\VB.NET\TM APP\TM APP\obj\Debug\wpfOrderLine.baml
 J:\Brick\VB.NET\TM APP\TM APP\obj\Debug\TM APP.vbprojResolveAssemblyReference.cache
 J:\Brick\VB.NET\TM APP\TM APP\obj\Debug\wpfProjects.g.vb
 J:\Brick\VB.NET\TM APP\TM APP\obj\Debug\wpfProjects.baml
+C:\Users\CIM\Source\Repos\TMHub\TM APP\bin\Debug\TM APP.exe.config
+C:\Users\CIM\Source\Repos\TMHub\TM APP\bin\Debug\TM APP.exe
+C:\Users\CIM\Source\Repos\TMHub\TM APP\bin\Debug\TM APP.pdb
+C:\Users\CIM\Source\Repos\TMHub\TM APP\bin\Debug\TM APP.xml
+C:\Users\CIM\Source\Repos\TMHub\TM APP\obj\Debug\TM APP.vbprojResolveAssemblyReference.cache
+C:\Users\CIM\Source\Repos\TMHub\TM APP\obj\Debug\My Project\Window1.g.vb
+C:\Users\CIM\Source\Repos\TMHub\TM APP\obj\Debug\wpfProjects.g.vb
+C:\Users\CIM\Source\Repos\TMHub\TM APP\obj\Debug\wpfOrderLine.g.vb
+C:\Users\CIM\Source\Repos\TMHub\TM APP\obj\Debug\wpfOrders.g.vb
+C:\Users\CIM\Source\Repos\TMHub\TM APP\obj\Debug\wpfMain.g.vb
+C:\Users\CIM\Source\Repos\TMHub\TM APP\obj\Debug\Application.g.vb
+C:\Users\CIM\Source\Repos\TMHub\TM APP\obj\Debug\TM APP_MarkupCompile.cache
+C:\Users\CIM\Source\Repos\TMHub\TM APP\obj\Debug\TM APP_MarkupCompile.lref
+C:\Users\CIM\Source\Repos\TMHub\TM APP\obj\Debug\Application.baml
+C:\Users\CIM\Source\Repos\TMHub\TM APP\obj\Debug\My Project\Window1.baml
+C:\Users\CIM\Source\Repos\TMHub\TM APP\obj\Debug\wpfProjects.baml
+C:\Users\CIM\Source\Repos\TMHub\TM APP\obj\Debug\wpfOrderLine.baml
+C:\Users\CIM\Source\Repos\TMHub\TM APP\obj\Debug\wpfOrders.baml
+C:\Users\CIM\Source\Repos\TMHub\TM APP\obj\Debug\wpfMain.baml
+C:\Users\CIM\Source\Repos\TMHub\TM APP\obj\Debug\TM APP.g.resources
+C:\Users\CIM\Source\Repos\TMHub\TM APP\obj\Debug\WpfApp1.Resources.resources
+C:\Users\CIM\Source\Repos\TMHub\TM APP\obj\Debug\TM APP.vbproj.GenerateResource.Cache
+C:\Users\CIM\Source\Repos\TMHub\TM APP\obj\Debug\TM APP.exe
+C:\Users\CIM\Source\Repos\TMHub\TM APP\obj\Debug\TM APP.xml
+C:\Users\CIM\Source\Repos\TMHub\TM APP\obj\Debug\TM APP.pdb

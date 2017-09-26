@@ -100,7 +100,7 @@ Class wpfOrders
                 If .Rows(i)("CommentType").ToString.Trim = "P" Then
                     'Product Line
                     OrderLines.Add(New cOrderLines(LineNo, Format(.Rows(i)("qty"), "#"), "", "", "", AnalysisCode, Desc, .Rows(i)("d_or_e"),
-                                               GoodsVal, BandVal, HaulVal, AgentVal, SPVal, Margin, "BON", .Rows(i)("rev"), .Rows(i)("description1").ToString.Trim,
+                                               GoodsVal, BandVal, HaulVal, AgentVal, SPVal, Margin, "", .Rows(i)("rev"), .Rows(i)("description1").ToString.Trim,
                                                .Rows(i)("description2").ToString.Trim, .Rows(i)("description3").ToString.Trim))
                 Else
                     'Comment Line
