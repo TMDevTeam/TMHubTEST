@@ -65,7 +65,78 @@ Public Class cOrderLines
         Me.BuyersON = BuyersON
         Me.Rev = Rev
     End Sub
-
+    Public Property HaulDisc3 As String
+        Get
+            Return _HaulDisc3
+        End Get
+        Set(value As String)
+            _HaulDisc3 = value
+        End Set
+    End Property
+    Public Property HaulDisc2 As String
+        Get
+            Return _HaulDisc2
+        End Get
+        Set(value As String)
+            _HaulDisc2 = value
+        End Set
+    End Property
+    Public Property HaulDisc1 As String
+        Get
+            Return _HaulDisc1
+        End Get
+        Set(value As String)
+            _HaulDisc1 = value
+        End Set
+    End Property
+    Public Property GoodsDisc3 As String
+        Get
+            Return _GoodsDisc3
+        End Get
+        Set(value As String)
+            _GoodsDisc3 = value
+        End Set
+    End Property
+    Public Property GoodsDisc2 As String
+        Get
+            Return _GoodsDisc2
+        End Get
+        Set(value As String)
+            _GoodsDisc2 = value
+        End Set
+    End Property
+    Public Property GoodsDisc1 As String
+        Get
+            Return _GoodsDisc1
+        End Get
+        Set(value As String)
+            _GoodsDisc1 = value
+        End Set
+    End Property
+    Public Property CollectionNo As String
+        Get
+            Return _CollectionNo
+        End Get
+        Set(value As String)
+            _CollectionNo = value
+        End Set
+    End Property
+    Public Property BPLine As String
+        Get
+            Return _BPLine
+        End Get
+        Set(value As String)
+            _BPLine = value
+        End Set
+    End Property
+    Public Property Plots As String
+        Get
+            Return _Plots
+        End Get
+        Set(value As String)
+            _Plots = value
+        End Set
+    End Property
     Public Property EffectiveDate As String
         Get
             Return _EffectiveDate
