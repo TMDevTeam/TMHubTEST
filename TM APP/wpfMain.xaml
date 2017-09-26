@@ -1,0 +1,627 @@
+﻿<Window x:Class="wpfMain"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d" 
+        Title="TM APP" Style="{StaticResource myWindow}">
+
+
+
+    <Grid x:Name="BackgroundGrid" ShowGridLines="false" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin=" 5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="4*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions >
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <!--********************Row 0***************************-->
+        <Grid Grid.ColumnSpan="4">
+            <Grid.ColumnDefinitions >
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions >
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Menu Grid.Column="0" Grid.ColumnSpan="5">
+                <MenuItem Header="CRM">
+                    <MenuItem Header="Add Trip Report"/>
+                </MenuItem>
+                <MenuItem Header="Projects">
+                    <MenuItem Header="New Project"/>
+                </MenuItem>
+                <MenuItem Header="Orders">
+                    <MenuItem Name="mnuOrders" Header="New Order" Click="mnuOrders_Click" />
+                </MenuItem>
+                <MenuItem Header="Stock">
+                    <MenuItem Header="View Stock"/>
+                </MenuItem>
+                <MenuItem Header="Reports">
+                    <MenuItem Header="View Reports"/>
+                </MenuItem>
+            </Menu>
+        </Grid>
+
+        <!--********************Row 1***************************-->
+        <!--Column0 (Labels)-->
+        <Border Background="GhostWhite" BorderBrush="Gainsboro" BorderThickness="1" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="1" Margin="2">
+            <StackPanel Grid.Row="1" Grid.Column="0"  >
+                <ComboBox  Name="cboChoice" >
+                    <ComboBoxItem IsSelected="True" >Customers</ComboBoxItem>
+                    <ComboBoxItem >Hauliers</ComboBoxItem>
+                    <ComboBoxItem >Suppliers</ComboBoxItem>
+                </ComboBox>
+                <Label Name="lblAddress1" >Address:</Label>
+                <Label Name="lblAddress2" ></Label>
+                <Label Name="lblAddress3" ></Label>
+                <Label Name="lblCity" >City:</Label>
+                <Label Name="lblPostCode" >Post Code:</Label>
+                <Label Name="lblTelephone" >Telephone:</Label>
+                <Label Name="lblEmail" >Email:</Label>
+            </StackPanel>
+        </Border>
+        <!--Column1 (Controls)-->
+        <Border Background="GhostWhite" BorderBrush="Gainsboro" BorderThickness="1" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="1" Margin="2">
+            <StackPanel Grid.Row="1" Grid.Column=" 1"  >
+
+                <ComboBox Name="cboCustomer" SelectedIndex="0"></ComboBox>
+
+                <TextBox Name="txtAddress1"></TextBox>
+                <TextBox Name="txtAddress2"></TextBox>
+                <TextBox Name="txtAddress3"></TextBox>
+                <TextBox Name="txtCity"></TextBox>
+                <TextBox Name="txtPostCode"></TextBox>
+                <TextBox Name="txtTelephone"></TextBox>
+                <TextBox Name="txtEmail"></TextBox>
+
+            </StackPanel>
+        </Border>
+
+        <!--Column2 (Labels)-->
+        <Border Background="GhostWhite" BorderBrush="Gainsboro" BorderThickness="1" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="1" Margin="2">
+            <StackPanel Grid.Row="1" Grid.Column="2"  >
+                <Label Name="lblCustomerAddr" >Addresses:</Label>
+                <Label Name="lblAddress1Addr" >Address:</Label>
+                <Label Name="lblAddress2Addr" ></Label>
+                <Label Name="lblAddress3Addr" ></Label>
+                <Label Name="lblCityAddr" >City:</Label>
+                <Label Name="lblPostCodeAddr" >Post Code:</Label>
+                <Label Name="lblTelephoneAddr" >Telephone:</Label>
+                <Label Name="lblEmailAddr" >Email:</Label>
+            </StackPanel>
+        </Border>
+
+        <!--Column3 (Controls)-->
+        <Border Background="GhostWhite" BorderBrush="Gainsboro" BorderThickness="1" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="1" Margin="2">
+            <StackPanel Grid.Row="1" Grid.Column="3"  >
+
+                <ComboBox Name="cboCustomerAddr" SelectedIndex="0"></ComboBox>
+
+                <TextBox Name="txtAddress1Addr"></TextBox>
+                <TextBox Name="txtAddress2Addr"></TextBox>
+                <TextBox Name="txtAddress3Addr"></TextBox>
+                <TextBox Name="txtCityAddr"></TextBox>
+                <TextBox Name="txtPostCodeAddr"></TextBox>
+                <TextBox Name="txtTelephoneAddr"></TextBox>
+                <TextBox Name="txtEmailAddr"></TextBox>
+
+            </StackPanel>
+        </Border>
+
+        <!--********************Row 2***************************-->
+        <TabControl Grid.Row ="2" Grid.ColumnSpan ="4" >
+            <TabItem Header="Projects">
+                <Grid>
+                    <Grid.ColumnDefinitions >
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="0.7*" />
+                        <ColumnDefinition Width="0.6*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions >
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <!-- Search Section -->
+                    <Expander Grid.ColumnSpan="11" Header="Search">
+                        <Grid Grid.ColumnSpan="11">
+                            <Grid.ColumnDefinitions >
+                                <ColumnDefinition Width="70" />
+                                <ColumnDefinition Width="70" />
+                                <ColumnDefinition Width="70" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="45" />
+                                <ColumnDefinition Width="1.05*" />
+                                <ColumnDefinition Width="55" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="50" />
+                                <ColumnDefinition Width="45" />
+                                <ColumnDefinition Width="1.05*" />
+                                <ColumnDefinition Width="60" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions >
+                                <RowDefinition Height="40" />
+                            </Grid.RowDefinitions>
+                            <Label Grid.Column="0">Search for</Label>
+                            <ComboBox Grid.Column="1" Name="cboProjectsSearchStatus" SelectedIndex="0" >Ordered</ComboBox>
+                            <Label Grid.Column="2">projects in</Label>
+                            <ComboBox Grid.Column="3" Name="cboProjectsSearchBranch" SelectedIndex="0" >All Branches</ComboBox>
+                            <Label Grid.Column="4">where</Label>
+                            <ComboBox Grid.Column="5" Name="cboProjectsSearchCat1" SelectedIndex="0" >All Categories</ComboBox>
+                            <Label Grid.Column="6">contains</Label>
+                            <TextBox Grid.Column="7" Name="txtProjectsSearch1"></TextBox>
+                            <ComboBox Grid.Column="8" Name="cboProjectsSearchAndOr" SelectedIndex="0" >And</ComboBox>
+                            <Label Grid.Column="9">where</Label>
+                            <ComboBox Grid.Column="10" Name="cboProjectsSearchCat2" SelectedIndex="0">All Categories</ComboBox>
+                            <Label Grid.Column="11">contains</Label>
+                            <TextBox Grid.Column="12"  Name="txtProjectsSearch2" ></TextBox>
+                            <Button Grid.Column="13"  Name="btnProjectsSearch">Search</Button>
+                        </Grid>
+                    </Expander>
+                        <!--<Grid Grid.ColumnSpan="11">
+                        <Grid.ColumnDefinitions >
+                            <ColumnDefinition Width="70" />
+                            <ColumnDefinition Width="70" />
+                            <ColumnDefinition Width="70" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="45" />
+                            <ColumnDefinition Width="1.05*" />
+                            <ColumnDefinition Width="55" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="50" />
+                            <ColumnDefinition Width="45" />
+                            <ColumnDefinition Width="1.05*" />
+                            <ColumnDefinition Width="60" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions >
+                            <RowDefinition Height="40" />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Column="0">Search for</Label>
+                        <ComboBox Grid.Column="1" Name="cboProjectsSearchStatus" SelectedIndex="0" >Ordered</ComboBox>
+                        <Label Grid.Column="2">projects in</Label>
+                        <ComboBox Grid.Column="3" Name="cboProjectsSearchBranch" SelectedIndex="0" >All Branches</ComboBox>
+                        <Label Grid.Column="4">where</Label>
+                        <ComboBox Grid.Column="5" Name="cboProjectsSearchCat1" SelectedIndex="0" >All Categories</ComboBox>
+                        <Label Grid.Column="6">contains</Label>
+                        <TextBox Grid.Column="7" Name="txtProjectsSearch1"></TextBox>
+                        <ComboBox Grid.Column="8" Name="cboProjectsSearchAndOr" SelectedIndex="0" >And</ComboBox>
+                        <Label Grid.Column="9">where</Label>
+                        <ComboBox Grid.Column="10" Name="cboProjectsSearchCat2" SelectedIndex="0">All Categories</ComboBox>
+                        <Label Grid.Column="11">contains</Label>
+                        <TextBox Grid.Column="12"  Name="txtProjectsSearch2" ></TextBox>
+                        <Button Grid.Column="13"  Name="btnProjectsSearch">Search</Button>
+                    </Grid>-->
+                    <DataGrid Grid.Row ="2" Grid.ColumnSpan="14" Name="grdProjects" AutoGenerateColumns="False" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding QuoteNo}" Header="Project No" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    
+                </Grid>
+            </TabItem>
+            <TabItem Header="Orders">
+                <Grid>
+                    <Grid.ColumnDefinitions >
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions >
+                        <RowDefinition Height="40" />
+                        <!--<RowDefinition Height="40" />-->
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <!-- Search Section -->
+                    <Grid Grid.ColumnSpan="11">
+                        <Grid.ColumnDefinitions >
+                            <ColumnDefinition Width="70" />
+                            <ColumnDefinition Width="70" />
+                            <ColumnDefinition Width="70" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="45" />
+                            <ColumnDefinition Width="1.05*" />
+                            <ColumnDefinition Width="55" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="50" />
+                            <ColumnDefinition Width="45" />
+                            <ColumnDefinition Width="1.05*" />
+                            <ColumnDefinition Width="60" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions >
+                            <RowDefinition Height="40" />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Column="0">Search for</Label>
+                        <ComboBox Grid.Column="1" Name="cboOrdersSearchStatus" SelectedIndex="0">Ordered</ComboBox>
+                        <Label Grid.Column="2">orders in</Label>
+                        <ComboBox Grid.Column="3" Name="cboOrdersSearchBranch" SelectedIndex="0">All Branches</ComboBox>
+                        <Label Grid.Column="4">where</Label>
+                        <ComboBox Grid.Column="5" Name="cboOrdersSearchCat1" SelectedIndex="0">All Categories</ComboBox>
+                        <Label Grid.Column="6">contains</Label>
+                        <TextBox Grid.Column="7" Name="txtOrdersSearch1"></TextBox>
+                        <ComboBox Grid.Column="8" Name="cboOrdersSearchAndOr" SelectedIndex="0">And</ComboBox>
+                        <Label Grid.Column="9">where</Label>
+                        <ComboBox Grid.Column="10" Name="cboOrdersSearchCat2" SelectedIndex="0">All Categories</ComboBox>
+                        <Label Grid.Column="11">contains</Label>
+                        <TextBox Grid.Column="12"  Name="txtOrdersSearch2" ></TextBox>
+                        <Button Grid.Column="13"  Name="btnOrdersSearch" >Search</Button>
+                    </Grid>
+                    <DataGrid Grid.Row ="2" Grid.ColumnSpan="9" Name="grdOrders" AutoGenerateColumns="False" IsReadOnly="True" >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding orderno}" Header="Order No" />
+                            <DataGridTextColumn Binding="{Binding Supplier}" Header="Supplier" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Call Offs">
+                <Grid>
+                    <Grid.ColumnDefinitions >
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions >
+                        <RowDefinition Height="40" />
+                        
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <!-- Search Section -->
+                    <Grid Grid.ColumnSpan="11">
+                        <Grid.ColumnDefinitions >
+                            <ColumnDefinition Width="70" />
+                            <ColumnDefinition Width="70" />
+                            <ColumnDefinition Width="70" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="45" />
+                            <ColumnDefinition Width="1.05*" />
+                            <ColumnDefinition Width="55" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="50" />
+                            <ColumnDefinition Width="45" />
+                            <ColumnDefinition Width="1.05*" />
+                            <ColumnDefinition Width="60" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions >
+                            <RowDefinition Height="40" />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Column="0">Search for</Label>
+                        <ComboBox Grid.Column="1" Name="cboCOFFSearchStatus" SelectedIndex="0">Ordered</ComboBox>
+                        <Label Grid.Column="2">call offs in</Label>
+                        <ComboBox Grid.Column="3" Name="cboCOFFSearchBranch" SelectedIndex="0">All Branches</ComboBox>
+                        <Label Grid.Column="4">where</Label>
+                        <ComboBox Grid.Column="5" Name="cboCOFFSearchCat1" SelectedIndex="0">All Categories</ComboBox>
+                        <Label Grid.Column="6">contains</Label>
+                        <TextBox Grid.Column="7" Name="txtCOFFSearch1"></TextBox>
+                        <ComboBox Grid.Column="8" Name="cboCOFFSearchAndOr" SelectedIndex="0">And</ComboBox>
+                        <Label Grid.Column="9">where</Label>
+                        <ComboBox Grid.Column="10" Name="cboCOFFSearchCat2" SelectedIndex="0">All Categories</ComboBox>
+                        <Label Grid.Column="11">contains</Label>
+                        <TextBox Grid.Column="12"  Name="txtCOFFSearch2" ></TextBox>
+                        <Button Grid.Column="13"  Name="btnCOFFSearch">Search</Button>
+                    </Grid>
+                    <DataGrid Grid.Row ="2" Grid.ColumnSpan="9" Name="grdCOFF" AutoGenerateColumns="False" IsReadOnly="True" >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding coff_no}" Header="Call Off No" />
+                            
+                        </DataGrid.Columns>
+                    </DataGrid>
+                 </Grid> 
+            </TabItem>
+            <TabItem Header="QCR's">
+                <Grid>
+                    <Grid.ColumnDefinitions >
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions >
+                        <RowDefinition Height="40" />
+                        <RowDefinition Height="*" />
+
+                    </Grid.RowDefinitions>
+                    <!-- Search Section -->
+                    <Grid Grid.ColumnSpan="11">
+                        <Grid.ColumnDefinitions >
+                            <ColumnDefinition Width="70" />
+                            <ColumnDefinition Width="70" />
+                            <ColumnDefinition Width="70" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="45" />
+                            <ColumnDefinition Width="1.05*" />
+                            <ColumnDefinition Width="55" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="50" />
+                            <ColumnDefinition Width="45" />
+                            <ColumnDefinition Width="1.05*" />
+                            <ColumnDefinition Width="60" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions >
+                            <RowDefinition Height="40" />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Column="0">Search for</Label>
+                        <ComboBox Grid.Column="1" Name="cboQCRSearchStatus" SelectedIndex="0">Ordered</ComboBox>
+                        <Label Grid.Column="2">QCR's in</Label>
+                        <ComboBox Grid.Column="3" Name="cboQCRSearchBranch" SelectedIndex="0">All Branches</ComboBox>
+                        <Label Grid.Column="4">where</Label>
+                        <ComboBox Grid.Column="5" Name="cboQCRSearchCat1" SelectedIndex="0">All Categories</ComboBox>
+                        <Label Grid.Column="6">contains</Label>
+                        <TextBox Grid.Column="7" Name="txtQCRSearch1"></TextBox>
+                        <ComboBox Grid.Column="8" Name="cboQCRSearchAndOr" SelectedIndex="0">And</ComboBox>
+                        <Label Grid.Column="9">where</Label>
+                        <ComboBox Grid.Column="10" Name="cboQCRSearchCat2" SelectedIndex="0">All Categories</ComboBox>
+                        <Label Grid.Column="11">contains</Label>
+                        <TextBox Grid.Column="12"  Name="txtQCRSearch2" ></TextBox>
+                        <Button Grid.Column="13"  Name="btnQCRSearch">Search</Button>
+                    </Grid>
+                    <DataGrid Grid.Row ="2" Grid.ColumnSpan="9" Name="grdQCR" AutoGenerateColumns="False" IsReadOnly="True" >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding QCRNo}" Header="QCR No" />
+
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Invoice Queries">
+                <Grid>
+                    <Grid.ColumnDefinitions >
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions >
+                        <RowDefinition Height="40" />
+                        <RowDefinition Height="40" />
+                        <RowDefinition Height="26"/>
+                    </Grid.RowDefinitions>
+                    <!-- Search Section -->
+                    <Grid Grid.ColumnSpan="11">
+                        <Grid.ColumnDefinitions >
+                            <ColumnDefinition Width="70" />
+                            <ColumnDefinition Width="70" />
+                            <ColumnDefinition Width="70" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="45" />
+                            <ColumnDefinition Width="1.05*" />
+                            <ColumnDefinition Width="55" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="50" />
+                            <ColumnDefinition Width="45" />
+                            <ColumnDefinition Width="1.05*" />
+                            <ColumnDefinition Width="60" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions >
+                            <RowDefinition Height="40" />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Column="0">Search for</Label>
+                        <ComboBox Grid.Column="1" Name="cboInvSearchStatus" SelectedIndex="0">Ordered</ComboBox>
+                        <Label Grid.Column="2">invoices in</Label>
+                        <ComboBox Grid.Column="3" Name="cboInvSearchBranch" SelectedIndex="0" >All Branches</ComboBox>
+                        <Label Grid.Column="4">where</Label>
+                        <ComboBox Grid.Column="5" Name="cboInvSearchCat1" SelectedIndex="0">All Categories</ComboBox>
+                        <Label Grid.Column="6">contains</Label>
+                        <TextBox Grid.Column="7" Name="txtInvSearch1"></TextBox>
+                        <ComboBox Grid.Column="8" Name="cboInvSearchAndOr" SelectedIndex="0">And</ComboBox>
+                        <Label Grid.Column="9">where</Label>
+                        <ComboBox Grid.Column="10" Name="cboInvSearchCat2" SelectedIndex="0">All Categories</ComboBox>
+                        <Label Grid.Column="11">contains</Label>
+                        <TextBox Grid.Column="12"  Name="txtInvSearch2" ></TextBox>
+                        <Button Grid.Column="13"  Name="btnInvSearch">Search</Button>
+                    </Grid>
+                    <!-- Header row -->
+                    <Label Style="{StaticResource TitleLabel }" Grid.Row="1" Grid.Column="0">Invoice No.</Label>
+                    <Label Style="{StaticResource TitleLabel }" Grid.Row="1" Grid.Column="1">Document Date</Label>
+                    <Label Style="{StaticResource TitleLabel }" Grid.Row="1" Grid.Column="2">Due Date</Label>
+                    <Label Style="{StaticResource TitleLabel }" Grid.Row="1" Grid.Column="3">Value</Label>
+                    <Label Style="{StaticResource TitleLabel }" Grid.Row="1" Grid.Column="4">Batch Number</Label>
+                    <Label Style="{StaticResource TitleLabel }" Grid.Row="1" Grid.Column="5">Reference No.</Label>
+                    <Label Style="{StaticResource TitleLabel }" Grid.Row="1" Grid.Column="6">Status</Label>
+                    <Label Style="{StaticResource TitleLabel }" Grid.Row="1" Grid.Column="7">Description</Label>
+                    <Label Style="{StaticResource TitleLabel }" Grid.Row="1" Grid.Column="8">Posted Date</Label>
+                    <Label Style="{StaticResource TitleLabel }" Grid.Row="1" Grid.Column="9">Posted By</Label>
+
+                    <!-- Line Rows -->
+                    <Label Style="{StaticResource GridRowLabel }" Grid.Row="2" Grid.Column="0">1234567</Label>
+                    <Label Style="{StaticResource GridRowLabel }" Grid.Row="2" Grid.Column="1">17/07/2017</Label>
+                    <Label Style="{StaticResource GridRowLabel }" Grid.Row="2" Grid.Column="2">31/08/2017</Label>
+                    <Label Style="{StaticResource GridRowLabel }" Grid.Row="2" Grid.Column="3">£100</Label>
+                    <Label Style="{StaticResource GridRowLabel }" Grid.Row="2" Grid.Column="4">SPB12/1234</Label>
+                    <Label Style="{StaticResource GridRowLabel }" Grid.Row="2" Grid.Column="5"></Label>
+                    <Label Style="{StaticResource GridRowLabel }" Grid.Row="2" Grid.Column="6"></Label>
+                    <Label Style="{StaticResource GridRowLabel }" Grid.Row="2" Grid.Column="7"></Label>
+                    <Label Style="{StaticResource GridRowLabel }" Grid.Row="2" Grid.Column="8"></Label>
+                    <Label Style="{StaticResource GridRowLabel }" Grid.Row="2" Grid.Column="9"></Label>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Credit Info">
+                <Grid >
+                    <Grid.ColumnDefinitions >
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="2*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions >
+                        <RowDefinition Height="40" />
+                        <RowDefinition Height="26"/>
+                        <RowDefinition Height="26"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="250"/>
+                    </Grid.RowDefinitions>
+                    <!-- Header row -->
+                    <Label Style="{StaticResource TitleLabel }" Grid.Row="0" Grid.Column="1">
+                        <TextBlock>Credit<LineBreak/>Limit (£)</TextBlock>
+                    </Label>
+                    <Label Style="{StaticResource TitleLabel }" Grid.Row="0" Grid.Column="2">
+                        <TextBlock>Current<LineBreak/>Balance (£)</TextBlock>
+                    </Label>
+                    <Label Style="{StaticResource TitleLabel }" Grid.Row="0" Grid.Column="3">
+                        <TextBlock>July<LineBreak/>Current (£)</TextBlock>
+                    </Label>
+                    <Label Style="{StaticResource TitleLabel }" Grid.Row="0" Grid.Column="4">
+                        <TextBlock>June<LineBreak/>Due (£)</TextBlock>
+                    </Label>
+                    <Label Style="{StaticResource TitleLabel }" Grid.Row="0" Grid.Column="5">
+                        <TextBlock>May<LineBreak/>Overdue (£)</TextBlock>
+                    </Label>
+                    <Label Style="{StaticResource TitleLabel }" Grid.Row="0" Grid.Column="6">
+                        <TextBlock>April<LineBreak/>30 Days (£)</TextBlock>
+                    </Label>
+                    <Label Style="{StaticResource TitleLabel }" Grid.Row="0" Grid.Column="7">
+                        <TextBlock>March<LineBreak/>60+ Days (£)</TextBlock>
+                    </Label>
+
+                    <!-- Line Rows -->                    
+                    <Label Style="{StaticResource GridRowLabel }" Grid.Row="1" Grid.Column="1">250,000</Label>
+                    <Label Style="{StaticResource GridRowLabel }" Grid.Row="1" Grid.Column="2">0</Label>
+                    <Label Style="{StaticResource GridRowLabel }" Grid.Row="1" Grid.Column="3">0</Label>
+                    <Label Style="{StaticResource GridRowLabel }" Grid.Row="1" Grid.Column="4">0</Label>
+                    <Label Style="{StaticResource GridRowLabel }" Grid.Row="1" Grid.Column="5">0</Label>
+                    <Label Style="{StaticResource GridRowLabel }" Grid.Row="1" Grid.Column="6">0</Label>
+                    <Label Style="{StaticResource GridRowLabel }" Grid.Row="1" Grid.Column="7">0</Label>
+                    
+                    <!-- Notes Title-->
+                    <Label Style="{StaticResource TitleLabel }" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="7">Credit Control Notes</Label>
+
+                    <!-- Notes Info-->
+                    <TextBox  Grid.Row="4" Height="250" Grid.Column="1" Grid.ColumnSpan="7" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" >Credit Control Notes</TextBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Trip Reports">
+                <Grid>
+                    <Grid.ColumnDefinitions >
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions >
+                        <RowDefinition Height="40" />
+                        <RowDefinition Height="40" />
+                        <RowDefinition Height="26"/>
+                    </Grid.RowDefinitions>
+                    <!-- Search Section -->
+                    <Grid Grid.ColumnSpan="8">
+                        <Grid.ColumnDefinitions >
+                            <ColumnDefinition Width="70" />
+                            <ColumnDefinition Width="70" />
+                            <ColumnDefinition Width="70" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="45" />
+                            <ColumnDefinition Width="1.05*" />
+                            <ColumnDefinition Width="55" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="50" />
+                            <ColumnDefinition Width="45" />
+                            <ColumnDefinition Width="1.05*" />
+                            <ColumnDefinition Width="60" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions >
+                            <RowDefinition Height="40" />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Column="0">Search for</Label>
+                        <ComboBox Grid.Column="1" Name="cboTripSearchStatus" SelectedIndex="0">Ordered</ComboBox>
+                        <Label Grid.Column="2">invoices in</Label>
+                        <ComboBox Grid.Column="3" Name="cboTripSearchBranch" SelectedIndex="0">All Branches</ComboBox>
+                        <Label Grid.Column="4">where</Label>
+                        <ComboBox Grid.Column="5" Name="cboTripSearchCat1" SelectedIndex="0">All Categories</ComboBox>
+                        <Label Grid.Column="6">contains</Label>
+                        <TextBox Grid.Column="7" Name="txtTripSearch1"></TextBox>
+                        <ComboBox Grid.Column="8" Name="cboTripSearchAndOr" SelectedIndex="0">And</ComboBox>
+                        <Label Grid.Column="9">where</Label>
+                        <ComboBox Grid.Column="10" Name="cboTripSearchCat2" SelectedIndex="0">All Categories</ComboBox>
+                        <Label Grid.Column="11">contains</Label>
+                        <TextBox Grid.Column="12"  Name="txtTripSearch2" ></TextBox>
+                        <Button Grid.Column="13"  Name="btnTripSearch">Search</Button>
+                    </Grid>
+                    <!-- Header row -->
+                    <Label Style="{StaticResource TitleLabel }" Grid.Row="1" Grid.Column="0" >Customer</Label>
+                    <Label Style="{StaticResource TitleLabel }" Grid.Row="1" Grid.Column="1" >Visit Date</Label>
+                    <Label Style="{StaticResource TitleLabel }" Grid.Row="1" Grid.Column="2" >Post Code</Label>
+                    <Label Style="{StaticResource TitleLabel }" Grid.Row="1" Grid.Column="3" >Meeting Comments</Label>
+                    <Label Style="{StaticResource TitleLabel }" Grid.Row="1" Grid.Column="4" >Outcome</Label>
+                    <Label Style="{StaticResource TitleLabel }" Grid.Row="1" Grid.Column="5" >Salesperson</Label>
+                    <Label Style="{StaticResource TitleLabel }" Grid.Row="1" Grid.Column="6" >Type</Label>
+
+                    <!-- Line Rows -->
+                    <Label Style="{StaticResource GridRowLabel }" Grid.Row="2" Grid.Column="0" >Balfour Beatty</Label>
+                    <Label Style="{StaticResource GridRowLabel }" Grid.Row="2" Grid.Column="1" >17/07/2017</Label>
+                    <Label Style="{StaticResource GridRowLabel }" Grid.Row="2" Grid.Column="2" >BS8 3NW</Label>
+                    <Label Style="{StaticResource GridRowLabel }" Grid.Row="2" Grid.Column="3" >This is a test</Label>
+                    <Label Style="{StaticResource GridRowLabel }" Grid.Row="2" Grid.Column="4" >This is a test</Label>
+                    <Label Style="{StaticResource GridRowLabel }" Grid.Row="2" Grid.Column="5" >STB</Label>
+                    <Label Style="{StaticResource GridRowLabel }" Grid.Row="2" Grid.Column="6" >Existing</Label>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Allocation">
+                
+            </TabItem>
+
+        </TabControl>
+    </Grid>
+
+
+
+
+</Window>

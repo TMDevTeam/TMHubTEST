@@ -1,0 +1,25 @@
+J:\Brick\VB.NET\TM APP\TM APP\bin\Debug\TM APP.exe.config
+J:\Brick\VB.NET\TM APP\TM APP\bin\Debug\TM APP.exe
+J:\Brick\VB.NET\TM APP\TM APP\bin\Debug\TM APP.pdb
+J:\Brick\VB.NET\TM APP\TM APP\bin\Debug\TM APP.xml
+J:\Brick\VB.NET\TM APP\TM APP\obj\Debug\Application.g.vb
+J:\Brick\VB.NET\TM APP\TM APP\obj\Debug\TM APP_MarkupCompile.cache
+J:\Brick\VB.NET\TM APP\TM APP\obj\Debug\TM APP_MarkupCompile.lref
+J:\Brick\VB.NET\TM APP\TM APP\obj\Debug\TM APP.g.resources
+J:\Brick\VB.NET\TM APP\TM APP\obj\Debug\WpfApp1.Resources.resources
+J:\Brick\VB.NET\TM APP\TM APP\obj\Debug\TM APP.vbproj.GenerateResource.Cache
+J:\Brick\VB.NET\TM APP\TM APP\obj\Debug\TM APP.exe
+J:\Brick\VB.NET\TM APP\TM APP\obj\Debug\TM APP.xml
+J:\Brick\VB.NET\TM APP\TM APP\obj\Debug\TM APP.pdb
+J:\Brick\VB.NET\TM APP\TM APP\obj\Debug\Application.baml
+J:\Brick\VB.NET\TM APP\TM APP\obj\Debug\wpfMain.g.vb
+J:\Brick\VB.NET\TM APP\TM APP\obj\Debug\wpfMain.baml
+J:\Brick\VB.NET\TM APP\TM APP\obj\Debug\My Project\Window1.g.vb
+J:\Brick\VB.NET\TM APP\TM APP\obj\Debug\wpfOrders.g.vb
+J:\Brick\VB.NET\TM APP\TM APP\obj\Debug\My Project\Window1.baml
+J:\Brick\VB.NET\TM APP\TM APP\obj\Debug\wpfOrders.baml
+J:\Brick\VB.NET\TM APP\TM APP\obj\Debug\wpfOrderLine.g.vb
+J:\Brick\VB.NET\TM APP\TM APP\obj\Debug\wpfOrderLine.baml
+J:\Brick\VB.NET\TM APP\TM APP\obj\Debug\TM APP.vbprojResolveAssemblyReference.cache
+J:\Brick\VB.NET\TM APP\TM APP\obj\Debug\wpfProjects.g.vb
+J:\Brick\VB.NET\TM APP\TM APP\obj\Debug\wpfProjects.baml

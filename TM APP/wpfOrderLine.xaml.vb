@@ -1,0 +1,3 @@
+﻿Class wpfOrderLine
+
+End Class
