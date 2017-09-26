@@ -101,10 +101,12 @@ Class wpfOrders
                     'Product Line
                     OrderLines.Add(New cOrderLines(LineNo, Format(.Rows(i)("qty"), "#"), "", "", "", AnalysisCode, Desc, .Rows(i)("d_or_e"),
                                                GoodsVal, BandVal, HaulVal, AgentVal, SPVal, Margin, "", .Rows(i)("rev"), .Rows(i)("description1").ToString.Trim,
-                                               .Rows(i)("description2").ToString.Trim, .Rows(i)("description3").ToString.Trim))
+                                               .Rows(i)("description2").ToString.Trim, .Rows(i)("description3").ToString.Trim, .Rows(i)("date_effective").ToString.Trim,
+                                               .Rows(i)("PlotNotes").ToString.Trim, .Rows(i)("BPLine").ToString.Trim, "", .Rows(i)("goodsdisc1").ToString.Trim,
+                                               .Rows(i)("goodsdisc2").ToString.Trim, .Rows(i)("goodsdisc3").ToString.Trim))
                 Else
                     'Comment Line
-                    OrderLines.Add(New cOrderLines(LineNo, "", "", "", "", AnalysisCode, Desc, "", "", "", "", "", "", "", "", "", "", "", ""))
+                    OrderLines.Add(New cOrderLines(LineNo, "", "", "", "", AnalysisCode, Desc, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""))
                 End If
 
             Next
@@ -566,7 +568,7 @@ vehicle_done:
         ' This call is required by the designer.
         InitializeComponent()
         Call SetupCombos()
-        'expGridLines.Visibility = Visibility.Hidden
+        Call hideLineDetailSection()
         If Llun(TMOrderNo).Length > 0 Then
             txtOrderNo.Text = TMOrderNo
             Call DisplayOrder(txtOrderNo.Text)
@@ -919,37 +921,63 @@ DisplaySiteAddress:
         Call ClearOrderLineDetails()
 
         Dim OrderLine As cOrderLines = grdOrderLines.SelectedItem
-        txtLineNo.Text = OrderLine.LineNo
-        txtQty.Text = OrderLine.OrderQty
-        'Products here
-        txtDescription1.Text = OrderLine.Desc1
-        txtDescription2.Text = OrderLine.Desc2
-        txtDescription3.Text = OrderLine.Desc3
-        txtDE.Text = OrderLine.DorE
-        'Goods & Per
-        StringPosition = InStr(OrderLine.GoodsVal, vbCrLf)
-        txtGoodsBP.Text = OrderLine.GoodsVal.Substring(0, StringPosition)
-        txtGoodsPer.Text = OrderLine.GoodsVal.Substring(StringPosition + 1)
-        txtPackingBP.Text = OrderLine.PackingVal
-        'Haulage & Per
-        StringPosition = InStr(OrderLine.HaulVal, vbCrLf)
-        txtHaulageBP.Text = OrderLine.HaulVal.Substring(0, StringPosition)
-        txtHaulagePer.Text = OrderLine.HaulVal.Substring(StringPosition + 1)
-        'Commision & Per
-        StringPosition = InStr(OrderLine.CommVal, vbCrLf)
-        txtCommissionBP.Text = OrderLine.CommVal.Substring(0, StringPosition)
-        txtCommissionPer.Text = OrderLine.CommVal.Substring(StringPosition + 1)
-        'SP & Per
-        StringPosition = InStr(OrderLine.SPVal, vbCrLf)
-        txtSP.Text = OrderLine.SPVal.Substring(0, StringPosition)
-        txtSPPer.Text = OrderLine.SPVal.Substring(StringPosition + 1)
-        'Margin
-        txtMargin.Text = OrderLine.Margin
-        'Effective Date
+        'Check for comment lines
+        If InStr(OrderLine.LineNo, "/") > 0 Then
+            Exit Sub
+        Else
+            txtLineNo.Text = OrderLine.LineNo
+            txtQty.Text = OrderLine.OrderQty
+            'Products here
+            txtDescription1.Text = OrderLine.Desc1
+            txtDescription2.Text = OrderLine.Desc2
+            txtDescription3.Text = OrderLine.Desc3
+            txtDE.Text = OrderLine.DorE
+            'Goods & Per
+            StringPosition = InStr(OrderLine.GoodsVal, vbCrLf)
+            txtGoodsBP.Text = OrderLine.GoodsVal.Substring(0, StringPosition)
+            txtGoodsPer.Text = OrderLine.GoodsVal.Substring(StringPosition + 1)
+            txtLineGoodsDisc1.Text = OrderLine.GoodsDisc1
+            txtLineGoodsDisc2.Text = OrderLine.GoodsDisc2
+            txtLineGoodsDisc3.Text = OrderLine.GoodsDisc3
+            'Packing
+            txtPackingBP.Text = OrderLine.PackingVal
+            'Haulage & Per
+            StringPosition = InStr(OrderLine.HaulVal, vbCrLf)
+            txtHaulageBP.Text = OrderLine.HaulVal.Substring(0, StringPosition)
+            txtHaulagePer.Text = OrderLine.HaulVal.Substring(StringPosition + 1)
+            'Commision & Per
+            StringPosition = InStr(OrderLine.CommVal, vbCrLf)
+            txtCommissionBP.Text = OrderLine.CommVal.Substring(0, StringPosition)
+            txtCommissionPer.Text = OrderLine.CommVal.Substring(StringPosition + 1)
+            'SP & Per
+            StringPosition = InStr(OrderLine.SPVal, vbCrLf)
+            txtSP.Text = OrderLine.SPVal.Substring(0, StringPosition)
+            txtSPPer.Text = OrderLine.SPVal.Substring(StringPosition + 1)
+            'Margin
+            txtMargin.Text = OrderLine.Margin
+            'Effective Date
+            txtEffectiveDate.Text = OrderLine.EffectiveDate
+            'Buyers Order Number
+            txtBuyersOrderNo.Text = OrderLine.BuyersON
+            'Plots
+            txtPlots.Text = OrderLine.Plots
+
+            Call showLineDetailSection()
+
+        End If
+    End Sub
+
+    Private Sub showLineDetailSection()
         expGridLines.IsExpanded = True
+        expGridLines.IsEnabled = True
         expGridLines.Visibility = Visibility.Visible
     End Sub
 
+    Private Sub hideLineDetailSection()
+        expGridLines.IsExpanded = False
+        expGridLines.IsEnabled = False
+        expGridLines.Visibility = Visibility.Collapsed
+    End Sub
     Private Sub ClearOrderLineDetails()
         txtLineNo.Clear()
 
@@ -975,13 +1003,17 @@ DisplaySiteAddress:
         txtPlots.Clear()
         txtBuyersOrder.Clear()
         txtLineGoodsDisc1.Clear()
-        txtHaulDisc1.Clear()
+
         cboBPLine.SelectedIndex = -1
         txtLineGoodsDisc2.Clear()
-        txtHaulDisc2.Clear()
+
         txtCollectionNo.Clear()
         txtLineGoodsDisc3.Clear()
-        txtHaulDisc3.Clear()
+
+    End Sub
+
+    Private Sub grdOrderLines_GotFocus(sender As Object, e As RoutedEventArgs) Handles grdOrderLines.GotFocus
+        Call hideLineDetailSection()
     End Sub
 
 End Class

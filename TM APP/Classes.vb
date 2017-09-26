@@ -38,13 +38,11 @@ Public Class cOrderLines
     Private _GoodsDisc1 As String
     Private _GoodsDisc2 As String
     Private _GoodsDisc3 As String
-    Private _HaulDisc1 As String
-    Private _HaulDisc2 As String
-    Private _HaulDisc3 As String
+
 
     Public Sub New(LineNo As String, OrderQty As String, COFFQty As String, DelQty As String, RemainQty As String, Code As String, Desc As String, DorE As String, GoodsVal As String,
                    PackingVal As String, HaulVal As String, CommVal As String, SPVal As String, Margin As String, BuyersON As String, Rev As String, Desc1 As String, Desc2 As String,
-                   Desc3 As String)
+                   Desc3 As String, EffectiveDate As String, Plots As String, BPLine As String, CollectionNo As String, GoodsDisc1 As String, GoodsDisc2 As String, GoodsDisc3 As String)
         Me.LineNo = LineNo
         Me.OrderQty = OrderQty
         Me.COFFQty = COFFQty
@@ -64,31 +62,16 @@ Public Class cOrderLines
         Me.Margin = Margin
         Me.BuyersON = BuyersON
         Me.Rev = Rev
+        Me.EffectiveDate = EffectiveDate
+        Me.Plots = Plots
+        Me.BPLine = BPLine
+        Me.CollectionNo = CollectionNo
+        Me.GoodsDisc1 = GoodsDisc1
+        Me.GoodsDisc2 = GoodsDisc2
+        Me.GoodsDisc3 = GoodsDisc3
+
     End Sub
-    Public Property HaulDisc3 As String
-        Get
-            Return _HaulDisc3
-        End Get
-        Set(value As String)
-            _HaulDisc3 = value
-        End Set
-    End Property
-    Public Property HaulDisc2 As String
-        Get
-            Return _HaulDisc2
-        End Get
-        Set(value As String)
-            _HaulDisc2 = value
-        End Set
-    End Property
-    Public Property HaulDisc1 As String
-        Get
-            Return _HaulDisc1
-        End Get
-        Set(value As String)
-            _HaulDisc1 = value
-        End Set
-    End Property
+
     Public Property GoodsDisc3 As String
         Get
             Return _GoodsDisc3

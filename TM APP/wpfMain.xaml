@@ -221,6 +221,7 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Orders">
+                
                 <Grid>
                     <Grid.ColumnDefinitions >
                         <ColumnDefinition Width="*" />
@@ -234,11 +235,12 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions >
-                        <RowDefinition Height="40" />
+                        <RowDefinition Height="Auto" />
                         <!--<RowDefinition Height="40" />-->
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <!-- Search Section -->
+                    <Expander Grid.ColumnSpan="11" Header="Search">
                     <Grid Grid.ColumnSpan="11">
                         <Grid.ColumnDefinitions >
                             <ColumnDefinition Width="70" />
@@ -274,7 +276,8 @@
                         <TextBox Grid.Column="12"  Name="txtOrdersSearch2" ></TextBox>
                         <Button Grid.Column="13"  Name="btnOrdersSearch" >Search</Button>
                     </Grid>
-                    <DataGrid Grid.Row ="2" Grid.ColumnSpan="9" Name="grdOrders" AutoGenerateColumns="False" IsReadOnly="True" >
+                </Expander>
+                <DataGrid Grid.Row ="2" Grid.ColumnSpan="9" Name="grdOrders" AutoGenerateColumns="False" IsReadOnly="True" >
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding orderno}" Header="Order No" />
                             <DataGridTextColumn Binding="{Binding Supplier}" Header="Supplier" />
@@ -296,11 +299,12 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions >
-                        <RowDefinition Height="40" />
+                        <RowDefinition Height="Auto" />
                         
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <!-- Search Section -->
+                    <Expander Header="Search" Grid.ColumnSpan="11">
                     <Grid Grid.ColumnSpan="11">
                         <Grid.ColumnDefinitions >
                             <ColumnDefinition Width="70" />
@@ -336,6 +340,8 @@
                         <TextBox Grid.Column="12"  Name="txtCOFFSearch2" ></TextBox>
                         <Button Grid.Column="13"  Name="btnCOFFSearch">Search</Button>
                     </Grid>
+                        </Expander> 
+                    
                     <DataGrid Grid.Row ="2" Grid.ColumnSpan="9" Name="grdCOFF" AutoGenerateColumns="False" IsReadOnly="True" >
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding coff_no}" Header="Call Off No" />
@@ -356,11 +362,14 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions >
-                        <RowDefinition Height="40" />
+                        <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
 
                     </Grid.RowDefinitions>
                     <!-- Search Section -->
+                    <Expander Grid.ColumnSpan="11" Header="Search">
+                        
+                    
                     <Grid Grid.ColumnSpan="11">
                         <Grid.ColumnDefinitions >
                             <ColumnDefinition Width="70" />
@@ -396,6 +405,8 @@
                         <TextBox Grid.Column="12"  Name="txtQCRSearch2" ></TextBox>
                         <Button Grid.Column="13"  Name="btnQCRSearch">Search</Button>
                     </Grid>
+                    </Expander> 
+                                    
                     <DataGrid Grid.Row ="2" Grid.ColumnSpan="9" Name="grdQCR" AutoGenerateColumns="False" IsReadOnly="True" >
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding QCRNo}" Header="QCR No" />
@@ -404,7 +415,7 @@
                     </DataGrid>
                 </Grid>
             </TabItem>
-            <TabItem Header="Invoice Queries">
+            <TabItem Header="Invoice Queries" Visibility="Collapsed"   >
                 <Grid>
                     <Grid.ColumnDefinitions >
                         <ColumnDefinition Width="*" />
@@ -419,11 +430,14 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions >
-                        <RowDefinition Height="40" />
+                        <RowDefinition Height="Auto" />
                         <RowDefinition Height="40" />
                         <RowDefinition Height="26"/>
                     </Grid.RowDefinitions>
                     <!-- Search Section -->
+                    <Expander Grid.ColumnSpan="11" Header="Search">
+                        
+                    
                     <Grid Grid.ColumnSpan="11">
                         <Grid.ColumnDefinitions >
                             <ColumnDefinition Width="70" />
@@ -459,6 +473,7 @@
                         <TextBox Grid.Column="12"  Name="txtInvSearch2" ></TextBox>
                         <Button Grid.Column="13"  Name="btnInvSearch">Search</Button>
                     </Grid>
+                    </Expander>
                     <!-- Header row -->
                     <Label Style="{StaticResource TitleLabel }" Grid.Row="1" Grid.Column="0">Invoice No.</Label>
                     <Label Style="{StaticResource TitleLabel }" Grid.Row="1" Grid.Column="1">Document Date</Label>
@@ -543,7 +558,7 @@
                     <TextBox  Grid.Row="4" Height="250" Grid.Column="1" Grid.ColumnSpan="7" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" >Credit Control Notes</TextBox>
                 </Grid>
             </TabItem>
-            <TabItem Header="Trip Reports">
+            <TabItem Header="Call Reports">
                 <Grid>
                     <Grid.ColumnDefinitions >
                         <ColumnDefinition Width="*" />
@@ -555,11 +570,12 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions >
-                        <RowDefinition Height="40" />
+                        <RowDefinition Height="Auto" />
                         <RowDefinition Height="40" />
                         <RowDefinition Height="26"/>
                     </Grid.RowDefinitions>
                     <!-- Search Section -->
+                    <Expander Grid.ColumnSpan="8" Header="Search">
                     <Grid Grid.ColumnSpan="8">
                         <Grid.ColumnDefinitions >
                             <ColumnDefinition Width="70" />
@@ -595,6 +611,8 @@
                         <TextBox Grid.Column="12"  Name="txtTripSearch2" ></TextBox>
                         <Button Grid.Column="13"  Name="btnTripSearch">Search</Button>
                     </Grid>
+                    </Expander>
+                    
                     <!-- Header row -->
                     <Label Style="{StaticResource TitleLabel }" Grid.Row="1" Grid.Column="0" >Customer</Label>
                     <Label Style="{StaticResource TitleLabel }" Grid.Row="1" Grid.Column="1" >Visit Date</Label>

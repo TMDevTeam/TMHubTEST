@@ -588,9 +588,7 @@
                     <Label Style="{StaticResource TitleLabel }" Grid.Row="4" Grid.Column="5">
                         <TextBlock>Goods<LineBreak/>Disc</TextBlock>
                     </Label>
-                    <Label Style="{StaticResource TitleLabel }" Grid.Row="4" Grid.Column="7">
-                        <TextBlock>Haul<LineBreak/>Disc</TextBlock>
-                    </Label>
+
                     <Label Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2">Plot(s):</Label>
                     <TextBox Grid.Column="3" Grid.Row="4" Name="txtPlots"></TextBox>
 
@@ -598,19 +596,16 @@
                     <Label Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2">Buyer's Order:</Label>
                     <TextBox Grid.Column="3" Grid.Row="5" Name="txtBuyersOrder"></TextBox>
                     <TextBox Grid.Column="5" Grid.Row="5" Name="txtLineGoodsDisc1"></TextBox>
-                    <TextBox Grid.Column="7" Grid.Row="5" Name="txtHaulDisc1"></TextBox>
-
+                    
                     <!-- Row 7 -->
                     <Label Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="2">BP Line:</Label>
                     <ComboBox  Grid.Column="3" Grid.Row="6" Name="cboBPLine"></ComboBox>
                     <TextBox Grid.Column="5" Grid.Row="6" Name="txtLineGoodsDisc2"></TextBox>
-                    <TextBox Grid.Column="7" Grid.Row="6" Name="txtHaulDisc2"></TextBox>
-
+                    
                     <!-- Row 8 -->
                     <Label Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="2">Collection No:</Label>
                     <TextBox  Grid.Column="3" Grid.Row="7" Name="txtCollectionNo"></TextBox>
                     <TextBox Grid.Column="5" Grid.Row="7" Name="txtLineGoodsDisc3"></TextBox>
-                    <TextBox Grid.Column="7" Grid.Row="7" Name="txtHaulDisc3"></TextBox>
                     <Button  Grid.Column="9" Grid.Row="7" Name="btnShowRevs">Show Revs</Button>
                     <Button  Grid.Column="10" Grid.Row="7" Name="btnCancelLine">Cancel Line</Button>
                     <Button  Grid.Column="11" Grid.Row="7" Name="btnSaveLine">Save Line</Button>
