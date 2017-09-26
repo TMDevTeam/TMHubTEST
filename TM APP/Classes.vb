@@ -31,6 +31,17 @@ Public Class cOrderLines
     Private _Margin As String
     Private _BuyersON As String
     Private _Rev As String
+    Private _EffectiveDate As String
+    Private _Plots As String
+    Private _BPLine As String
+    Private _CollectionNo As String
+    Private _GoodsDisc1 As String
+    Private _GoodsDisc2 As String
+    Private _GoodsDisc3 As String
+    Private _HaulDisc1 As String
+    Private _HaulDisc2 As String
+    Private _HaulDisc3 As String
+
     Public Sub New(LineNo As String, OrderQty As String, COFFQty As String, DelQty As String, RemainQty As String, Code As String, Desc As String, DorE As String, GoodsVal As String,
                    PackingVal As String, HaulVal As String, CommVal As String, SPVal As String, Margin As String, BuyersON As String, Rev As String, Desc1 As String, Desc2 As String,
                    Desc3 As String)
@@ -54,6 +65,16 @@ Public Class cOrderLines
         Me.BuyersON = BuyersON
         Me.Rev = Rev
     End Sub
+
+    Public Property EffectiveDate As String
+        Get
+            Return _EffectiveDate
+        End Get
+        Set(value As String)
+            _EffectiveDate = value
+        End Set
+    End Property
+
     Public Property Desc3 As String
         Get
             Return _Desc3
