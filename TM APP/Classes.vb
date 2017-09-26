@@ -296,33 +296,7 @@ Public Class cADOConnections
     Public DynamicsConnection As SqlConnection
     Public TMBConnectionString As String = "Server=192.168.10.2;Database=TMB;User Id=sa;Password=bowie;"
     Public TMBInvConnectionString As String = "Server=192.168.10.2;Database=TMBInv;User Id=sa;Password=bowie;"
+    Public DynamicsConnectionString As String = "Server=192.168.10.2;Database=DYNAMICS;User Id=sa;Password=bowie;"
 
-
-    Function OpenADOConnections(TMB As Boolean, TMBInv As Boolean, Dynamics As Boolean) As Boolean
-        TMBConnection = New SqlConnection(cADOConnections._TMBInvConnectionString)
-        TMBInvConnection = New SqlConnection(cADOConnections._TMBInvConnectionString)
-        DynamicsConnection = New SqlConnection(cADOConnections._TMBInvConnectionString)
-        Try
-            If TMB Then TMBConnection.Open()
-            If TMBInv Then TMBInvConnection.Open()
-            If Dynamics Then DynamicsConnection.Open()
-            Return True
-        Catch ex As Exception
-            'MsgBox("Can not open connection ! ")
-            Return False
-        End Try
-    End Function
-
-
-    Function CloseADOConnections() As Boolean
-        Try
-            TMBConnection.Close()
-            TMBInvConnection.Close()
-            DynamicsConnection.Close()
-            Return True
-        Catch ex As Exception
-            Return False
-        End Try
-    End Function
 End Class
 

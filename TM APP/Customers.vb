@@ -7,6 +7,14 @@ Public Class cCustomers
     Public dsCustomerAddress As New DataSet
     Public dsCurrentBalance As New DataSet
     Public dsArchitect As New DataSet
+    Public dsCCNotes As New DataSet
+
+    Public Current As Decimal
+    Public CurrentDue As Decimal
+    Public Overdue As Decimal
+    Public Overdue30 As Decimal
+    Public Overdue60 As Decimal
+    Public OverduePlus As Decimal
     Public ok As Boolean
     Sub getCustomer(TempCustomer As String)
 
@@ -211,14 +219,37 @@ Public Class cCustomers
 
     End Sub
 
-    Function GetCurrentBal(TempCustomer As String) As Decimal
+    Sub GetCCNotes(TempCustomer As String)
+
+        ok = False
 
         Dim SQLConnn As New cADOConnections
-        Dim SQL As String = "SELECT CUSTBLNC FROM RM00103"
-        SQL = Sql & " WHERE CUSTNMBR = '" & TempCustomer & "'"
+        Dim SQL As String = "SELECT * FROM NCCC1230"
+        SQL = SQL & " WHERE CUSTNMBR = '" & TempCustomer & "'"
+        SQL = SQL & " ORDER BY NC_Created_Date DESC"
         Dim connection As New SqlConnection(SQLConnn.TMBConnectionString)
         connection.Open()
-        Dim SQLAdap As New SqlDataAdapter(Sql, connection)
+        Dim SQLAdap As New SqlDataAdapter(SQL, connection)
+        connection.Close()
+
+        SQLAdap.Fill(dsCCNotes, "CCNotes")
+
+        If dsCCNotes.Tables("CCNotes").Rows.Count = 0 Then Exit Sub
+
+        ok = True
+
+    End Sub
+
+    Function GetCurrentBal(TempCustomer As String)
+
+        ok = False
+
+        Dim SQLConnn As New cADOConnections
+        Dim SQL As String = "SELECT CUSTBLNC, LASTAGED FROM RM00103"
+        SQL = SQL & " WHERE CUSTNMBR = '" & TempCustomer & "'"
+        Dim connection As New SqlConnection(SQLConnn.TMBConnectionString)
+        connection.Open()
+        Dim SQLAdap As New SqlDataAdapter(SQL, connection)
         connection.Close()
 
         SQLAdap.Fill(dsCurrentBalance, "CurrentBalance")
@@ -229,9 +260,66 @@ Public Class cCustomers
             Return dsCurrentBalance.Tables("CurrentBalance").Rows(0)("CUSTBLNC")
         End If
 
-
+        ok = True
 
     End Function
+
+    Sub GetCurrentBals(TempCustomer As String)
+
+        Current = 0
+        CurrentDue = 0
+        Overdue = 0
+        Overdue30 = 0
+        Overdue60 = 0
+        OverduePlus = 0
+
+        Dim SQLConnn As New cADOConnections
+        Dim SQL As String = "SELECT SUM(CURTRXAM) as DueBal, month(DOCDATE) as Month , year(DOCDATE) as Year FROM RM20101"
+        SQL = SQL & " WHERE CUSTNMBR = '" & TempCustomer & "'"
+        SQL = SQL & " AND RMDTYPAL <> 7"
+        SQL = SQL & " AND RMDTYPAL <> 9"
+        SQL = SQL & " AND CURTRXAM <> 0"
+        SQL = SQL & " GROUP BY year(DOCDATE), month(DOCDATE)"
+        SQL = SQL & " ORDER BY year(DOCDATE), month(DOCDATE)"
+        Dim connection As New SqlConnection(SQLConnn.TMBConnectionString)
+        connection.Open()
+        Dim SQLAdap As New SqlDataAdapter(SQL, connection)
+        connection.Close()
+
+        SQLAdap.Fill(dsCurrentBalance, "CurrentBalance")
+
+        If dsCurrentBalance.Tables("CurrentBalance").Rows.Count = 0 Then Exit Sub
+
+        With dsCurrentBalance.Tables("CurrentBalance")
+            For i As Integer = 0 To .Rows.Count - 1
+                'MessageBox.Show(.Rows(i)("Year").ToString.Trim & MonthName(.Rows(i)("Month")))
+
+                If IsDBNull(.Rows(i)("Year")) = False Then
+                    Select Case .Rows(i)("Year") & MonthName(.Rows(i)("Month"))
+                        Case Format(DateAdd("m", 0, Now), "yyyy") & Format(DateAdd("m", 0, Now), "MMMM")
+                            Current = .Rows(i)("DueBal")
+                        Case Format(DateAdd("m", -1, Now), "yyyy") & Format(DateAdd("m", -1, Now), "MMMM")
+                            CurrentDue = .Rows(i)("DueBal")
+                        Case Format(DateAdd("m", -2, Now), "yyyy") & Format(DateAdd("m", -2, Now), "MMMM")
+                            Overdue = .Rows(i)("DueBal")
+                        Case Format(DateAdd("m", -3, Now), "yyyy") & Format(DateAdd("m", -3, Now), "MMMM")
+                            Overdue30 = .Rows(i)("DueBal")
+                        Case Format(DateAdd("m", -4, Now), "yyyy") & Format(DateAdd("m", -4, Now), "MMMM")
+                            Overdue60 = .Rows(i)("DueBal")
+                            OverduePlus = OverduePlus + Overdue60
+                        Case Else
+                            OverduePlus = OverduePlus + .Rows(i)("DueBal")
+                    End Select
+                End If
+
+            Next
+        End With
+
+        ok = True
+
+    End Sub
+
+
 
 End Class
 ' ***** Possible Reader Option *****

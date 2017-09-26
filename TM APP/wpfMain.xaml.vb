@@ -201,6 +201,9 @@ Class wpfMain
         'Display QCR Grid
         Call DisplayQCRGrid(CustomerCode, "*", "*", "*", "*", "*", "*", "*", "*", "Open")
 
+        'Display Credit Info
+        Call DisplayCreditInfo(CustomerCode)
+
     End Sub
 
     Private Sub DisplayOrdersGrid(CustomerCode As String, SupplierCode As String, HaulierCode As String, SiteAddress As String,
@@ -419,5 +422,63 @@ Class wpfMain
         Call SetupCombos(cboChoice.Text.Trim)
     End Sub
 
+    Private Sub DisplayCreditInfo(CustomerCode As String)
+        Dim DisplayHeader As New cCustomers
+
+        'Current Balances & Limits
+        txtCreditLimit.Text = 0
+        txtCurrentBalance.Text = 0
+        txtCurrent.Text = 0
+        txtNotDue.Text = 0
+        txtOverdue.Text = 0
+        txt30Days.Text = 0
+        txt60Days.Text = 0
+
+        lblCurrent.Content = Format(DateAdd("m", 0, Now), "MMMM") & vbCrLf & "Current (£)"
+        lblNotDue.Content = Format(DateAdd("m", -1, Now), "MMMM") & vbCrLf & "Due (£)"
+        lblOverdue.Content = Format(DateAdd("m", -2, Now), "MMMM") & vbCrLf & "Overdue (£)"
+        lbl30Days.Content = Format(DateAdd("m", -3, Now), "MMMM") & vbCrLf & "30 Days (£)"
+        lbl60Days.Content = Format(DateAdd("m", -4, Now), "MMMM") & vbCrLf & "60+ Days (£)"
+
+        'Only display credit limit for customers
+        If cboChoice.Text <> "Customers" Then Exit Sub
+
+        DisplayHeader.getCustomer(CustomerCode)
+        If DisplayHeader.ok = False Then Exit Sub
+
+        With DisplayHeader.dsCustomer.Tables("Customer")
+            txtCreditLimit.Text = Format(.Rows(0)("CRLMTAMT"), "#,##0")
+        End With
+
+        DisplayHeader.GetCurrentBal(CustomerCode)
+        With DisplayHeader.dsCurrentBalance.Tables("CurrentBalance")
+            txtCurrentBalance.Text = Format(DisplayHeader.GetCurrentBal(CustomerCode), "#,##0")
+
+        End With
+
+
+        Call DisplayHeader.GetCurrentBals(CustomerCode)
+        If DisplayHeader.ok = True Then
+            'txtcreditlimit = Format(rsCustomers!CRLMTAMT, "#,##0")
+            'txtCurrentBalance = Format(rsCCNotes!CUSTBLNC, "#,##0")
+            txtCurrent.Text = Format(DisplayHeader.Current, "#,##0")
+            txtNotDue.Text = Format(DisplayHeader.CurrentDue, "#,##0")
+            txtOverdue.Text = Format(DisplayHeader.Overdue, "#,##0")
+            txt30Days.Text = Format(DisplayHeader.Overdue30, "#,##0")
+            txt60Days.Text = Format(DisplayHeader.OverduePlus, "#,##0")
+        End If
+
+
+        'Credit Control Notes
+        txtCCNotes.Clear
+        Call DisplayHeader.GetCCNotes(CustomerCode)
+
+        With DisplayHeader.dsCCNotes.Tables("CCNotes")
+            For i As Integer = 0 To .Rows.Count - 1
+                txtCCNotes.Text = txtCCNotes.Text & .Rows(i)("CRUSRID").ToString.Trim & " (" & .Rows(i)("NC_Created_Date").ToString.Trim & ") - " & .Rows(i)("TXTFIELD").ToString.Trim & vbCrLf & vbCrLf
+
+            Next
+        End With
+    End Sub
 
 End Class

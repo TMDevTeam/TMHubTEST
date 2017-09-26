@@ -520,42 +520,42 @@
                         <RowDefinition Height="250"/>
                     </Grid.RowDefinitions>
                     <!-- Header row -->
-                    <Label Style="{StaticResource TitleLabel }" Grid.Row="0" Grid.Column="1">
+                    <Label Style="{StaticResource TitleLabel }" Grid.Row="0" Grid.Column="1" >
                         <TextBlock>Credit<LineBreak/>Limit (£)</TextBlock>
                     </Label>
-                    <Label Style="{StaticResource TitleLabel }" Grid.Row="0" Grid.Column="2">
+                    <Label Style="{StaticResource TitleLabel }" Grid.Row="0" Grid.Column="2" Name="lblCurrentBalance">
                         <TextBlock>Current<LineBreak/>Balance (£)</TextBlock>
                     </Label>
-                    <Label Style="{StaticResource TitleLabel }" Grid.Row="0" Grid.Column="3">
+                    <Label Style="{StaticResource TitleLabel }" Grid.Row="0" Grid.Column="3" Name="lblCurrent">
                         <TextBlock>July<LineBreak/>Current (£)</TextBlock>
                     </Label>
-                    <Label Style="{StaticResource TitleLabel }" Grid.Row="0" Grid.Column="4">
+                    <Label Style="{StaticResource TitleLabel }" Grid.Row="0" Grid.Column="4" Name="lblNotDue">
                         <TextBlock>June<LineBreak/>Due (£)</TextBlock>
                     </Label>
-                    <Label Style="{StaticResource TitleLabel }" Grid.Row="0" Grid.Column="5">
+                    <Label Style="{StaticResource TitleLabel }" Grid.Row="0" Grid.Column="5" Name="lblOverdue">
                         <TextBlock>May<LineBreak/>Overdue (£)</TextBlock>
                     </Label>
-                    <Label Style="{StaticResource TitleLabel }" Grid.Row="0" Grid.Column="6">
+                    <Label Style="{StaticResource TitleLabel }" Grid.Row="0" Grid.Column="6" Name="lbl30Days">
                         <TextBlock>April<LineBreak/>30 Days (£)</TextBlock>
                     </Label>
-                    <Label Style="{StaticResource TitleLabel }" Grid.Row="0" Grid.Column="7">
+                    <Label Style="{StaticResource TitleLabel }" Grid.Row="0" Grid.Column="7" Name="lbl60Days">
                         <TextBlock>March<LineBreak/>60+ Days (£)</TextBlock>
                     </Label>
 
-                    <!-- Line Rows -->                    
-                    <Label Style="{StaticResource GridRowLabel }" Grid.Row="1" Grid.Column="1">250,000</Label>
-                    <Label Style="{StaticResource GridRowLabel }" Grid.Row="1" Grid.Column="2">0</Label>
-                    <Label Style="{StaticResource GridRowLabel }" Grid.Row="1" Grid.Column="3">0</Label>
-                    <Label Style="{StaticResource GridRowLabel }" Grid.Row="1" Grid.Column="4">0</Label>
-                    <Label Style="{StaticResource GridRowLabel }" Grid.Row="1" Grid.Column="5">0</Label>
-                    <Label Style="{StaticResource GridRowLabel }" Grid.Row="1" Grid.Column="6">0</Label>
-                    <Label Style="{StaticResource GridRowLabel }" Grid.Row="1" Grid.Column="7">0</Label>
+                    <!-- Line Rows -->
+                    <TextBox Grid.Row="1" Grid.Column="1" Name="txtCreditLimit"></TextBox>
+                    <TextBox Grid.Row="1" Grid.Column="2" Name="txtCurrentBalance"></TextBox>
+                    <TextBox Grid.Row="1" Grid.Column="3" Name="txtCurrent"></TextBox>
+                    <TextBox Grid.Row="1" Grid.Column="4" Name="txtNotDue"></TextBox>
+                    <TextBox Grid.Row="1" Grid.Column="5" Name="txtOverdue"></TextBox>
+                    <TextBox Grid.Row="1" Grid.Column="6" Name="txt30Days"></TextBox>
+                    <TextBox Grid.Row="1" Grid.Column="7" Name="txt60Days"></TextBox>
                     
                     <!-- Notes Title-->
                     <Label Style="{StaticResource TitleLabel }" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="7">Credit Control Notes</Label>
 
                     <!-- Notes Info-->
-                    <TextBox  Grid.Row="4" Height="250" Grid.Column="1" Grid.ColumnSpan="7" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" >Credit Control Notes</TextBox>
+                    <TextBox  Name="txtCCNotes" Grid.Row="4" Height="250" Grid.Column="1" Grid.ColumnSpan="7" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" >Credit Control Notes</TextBox>
                 </Grid>
             </TabItem>
             <TabItem Header="Call Reports">
