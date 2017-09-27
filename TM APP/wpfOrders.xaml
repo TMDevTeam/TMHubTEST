@@ -457,6 +457,9 @@
             
         
         <!--********************Row 1***************************-->
+        <Expander Header="Lines" Grid.Row ="2" Grid.ColumnSpan="9" IsExpanded="True" >
+            
+        
         <Border Background="GhostWhite" BorderBrush="Gainsboro" BorderThickness="1" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="6" Margin="2">
             <Grid>
                 <DataGrid Grid.Row ="2" Grid.ColumnSpan="9" Name="grdOrderLines" AutoGenerateColumns="false" IsReadOnly="True" >
@@ -494,6 +497,7 @@
 
             </Grid>
         </Border>
+        </Expander>
         <Border Background="GhostWhite" BorderBrush="Gainsboro" BorderThickness="1" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="6" Margin="2">
 
             <Expander Name="expGridLines" Header="Line Details">

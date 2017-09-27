@@ -420,6 +420,16 @@ Class wpfMain
 
     Private Sub cboChoice_DropDownClosed(sender As Object, e As EventArgs) Handles cboChoice.DropDownClosed
         Call SetupCombos(cboChoice.Text.Trim)
+        Call clearHeader()
+        Call clearGrids()
+        cboCustomerAddr.Items.Clear()
+    End Sub
+
+    Private Sub clearGrids()
+        grdProjects.ItemsSource = ""
+        grdOrders.ItemsSource = ""
+        grdCOFF.ItemsSource = ""
+        grdQCR.ItemsSource = ""
     End Sub
 
     Private Sub DisplayCreditInfo(CustomerCode As String)
