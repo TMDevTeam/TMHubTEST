@@ -48,3 +48,4 @@ C:\Users\CIM\Source\Repos\TMHub\TM APP\obj\Debug\TM APP.vbproj.GenerateResource.
 C:\Users\CIM\Source\Repos\TMHub\TM APP\obj\Debug\TM APP.exe
 C:\Users\CIM\Source\Repos\TMHub\TM APP\obj\Debug\TM APP.xml
 C:\Users\CIM\Source\Repos\TMHub\TM APP\obj\Debug\TM APP.pdb
+C:\Users\CIM\Source\Repos\TMHub\TM APP\obj\Debug\TM APP.vbproj.CoreCompileInputs.cache

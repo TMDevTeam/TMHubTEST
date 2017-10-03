@@ -15,7 +15,91 @@ Class wpfOrders
     Private Sub DisplayOrder(OrderNo As String)
         Call DisplayOrderHeader(OrderNo)
         Call DisplayOrderLines(OrderNo)
+        Call DisplayCOFFSchedule(OrderNo)
     End Sub
+
+    Sub DisplayCOFFSchedule(OrderNo As String)
+        Dim DisplayCOFFSched As New cCallOffs
+        Call DisplayCOFFSched.getCOFFByOrderNo(OrderNo)
+        If DisplayCOFFSched.ok = False Then Exit Sub
+
+        Dim COFFLines As New List(Of cCOFFSchedule)
+
+
+        With DisplayCOFFSched.dsCOFFHeader.Tables("COFFByON")
+            For i = 0 To .Rows.Count - 1
+
+                Call DisplayCOFFSched.getCOFFDeliverySchedule(.Rows(i)("coff_no"), .Rows(i)("branch"))
+                If DisplayCOFFSched.ok = False Then GoTo NextCOFF
+
+                With DisplayCOFFSched.dsCOFFSched.Tables("DeliverySchedule")
+                    'MessageBox.Show(.Rows.Count)
+                    For j = 0 To .Rows.Count - 1
+                        'DATE REQUESTED
+                        Dim DateRequested As String = Format(.Rows(j)("date_tm_rev"), "dd/MM/yyyy") ' & " " & !xdate_tm_rev
+
+                        'COFF NO
+                        Dim COFFNo As String = "C" & .Rows(j)("coff_no") ' & "-" & Trim(rsCoffLine!coff_suffix)
+
+                        ''STATUS
+
+                        ''QTY CALLED OFF
+
+                        Dim QtyCalledOff = .Rows(j)("qty_current")
+
+
+                        ''TotalCallOff = TotalCallOff + CCur(LlunNo(rsCoffLine!qty_current))
+
+                        ''DATE DELIVERED
+                        Dim DateDelivered As String
+                        If .Rows(j)("invoiced") Then
+                            If IsDBNull(.Rows(j)("del_date")) = False Then
+                                DateDelivered = .Rows(j)("del_date")
+                            Else
+                                DateDelivered = .Rows(j)("date_current") & "*"
+                            End If
+                        Else
+                            DateDelivered = ""
+                        End If
+
+                        ''INVOICE NUMBER
+                        Dim InvoiceNo As String
+                        If .Rows(j)("invoiced") And IsDBNull(.Rows(j)("first_invoice")) = False Then
+                            InvoiceNo = .Rows(j)("first_invoice")
+                        Else
+                            InvoiceNo = ""
+                        End If
+
+
+                        'QTY DELIVERED
+                        Dim QtyDelivered As String
+                        If IsDBNull(.Rows(j)("qty_invoiced")) Then
+                            QtyDelivered = 0
+                        Else
+                            QtyDelivered = .Rows(j)("qty_invoiced")
+                        End If
+
+
+                        'TotalDelivered = TotalDelivered + CCur(LlunNo(rsCoffLine!qty_invoiced))
+
+                        'QTY REMAINING
+
+                        'CUSTOMER COFF NO
+
+                        COFFLines.Add(New cCOFFSchedule(COFFNo, .Rows(j)("coff_suffix"), .Rows(j)("orderno"), .Rows(j)("line"), .Rows(j)("xdate_tm_rev"), DateRequested,
+                                                        "", QtyCalledOff, QtyDelivered, DateDelivered, InvoiceNo))
+                    Next
+
+                End With
+
+NextCOFF:
+            Next
+        End With
+
+        'Display order lines from the class
+        grdDeliverSchedule.ItemsSource = COFFLines
+    End Sub
+
     Sub DisplayOrderLines(OrderNo As String)
         Dim DisplayOrderLines As New cOrders
         DisplayOrderLines.getOrderLines(OrderNo)
@@ -918,6 +1002,9 @@ DisplaySiteAddress:
     Private Sub DisplayOrderLineDetails()
         Dim StringPosition As Integer
 
+        'Hide the delivery schedule to make more room on screen
+        expDeliverSchedule.IsExpanded = False
+
         Call ClearOrderLineDetails()
 
         Dim OrderLine As cOrderLines = grdOrderLines.SelectedItem
@@ -1016,4 +1103,38 @@ DisplaySiteAddress:
         Call hideLineDetailSection()
     End Sub
 
+    Private Sub expDeliverSchedule_Collapsed(sender As Object, e As RoutedEventArgs) Handles expDeliverSchedule.Collapsed
+        'Lines
+        BackgroundGrid.RowDefinitions(2).Height = New GridLength(1, GridUnitType.Star)
+        'Schedule
+        BackgroundGrid.RowDefinitions(4).Height = New GridLength(1, GridUnitType.Auto)
+    End Sub
+
+    Private Sub expDeliverSchedule_Expanded(sender As Object, e As RoutedEventArgs) Handles expDeliverSchedule.Expanded
+        'Lines
+        If expOrderLines.IsExpanded = False Then
+            BackgroundGrid.RowDefinitions(2).Height = New GridLength(1, GridUnitType.Auto)
+        Else
+            BackgroundGrid.RowDefinitions(2).Height = New GridLength(1, GridUnitType.Star)
+        End If
+        'Schedule
+        BackgroundGrid.RowDefinitions(4).Height = New GridLength(1, GridUnitType.Star)
+    End Sub
+
+
+    Private Sub expOrderLines_Expanded(sender As Object, e As RoutedEventArgs) Handles expOrderLines.Expanded
+        'Lines
+        BackgroundGrid.RowDefinitions(2).Height = New GridLength(1, GridUnitType.Star)
+        'Schedule
+
+        BackgroundGrid.RowDefinitions(4).Height = New GridLength(1, GridUnitType.Star)
+
+    End Sub
+
+    Private Sub expOrderLines_Collapsed(sender As Object, e As RoutedEventArgs) Handles expOrderLines.Collapsed
+        'Lines
+        BackgroundGrid.RowDefinitions(2).Height = New GridLength(1, GridUnitType.Auto)
+        'Schedule
+        BackgroundGrid.RowDefinitions(4).Height = New GridLength(1, GridUnitType.Star)
+    End Sub
 End Class
