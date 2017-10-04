@@ -24,12 +24,15 @@ Public Class cOrders
         ok = True
     End Sub
 
-    Sub getOrderLines(OrderNo As String)
+    Sub getOrderLines(OrderNo As String, LineNo As String)
         ok = False
 
         'MsgBox(OrderNo)
         Dim SQLConnn As New cADOConnections
-        Dim SQL As String = "SELECT * FROM sop_lines WHERE orderno = '" & OrderNo & "'"
+        Dim SQL As String = "SELECT * FROM sop_lines "
+        SQL = SQL & " WHERE orderno = '" & OrderNo & "'"
+        If LineNo <> "*" Then SQL = SQL & " AND line = " & LineNo
+        SQL = SQL & " ORDER BY orderno"
         Dim connection As New SqlConnection(SQLConnn.TMBInvConnectionString)
         connection.Open()
         Dim SQLAdap As New SqlDataAdapter(SQL, connection)

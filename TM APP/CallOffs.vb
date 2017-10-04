@@ -4,6 +4,7 @@ Public Class cCallOffs
     Public ok As Boolean
     Public dsCOFFHeader As New DataSet
     Public dsCOFFSched As New DataSet
+    Public dsCOFFWorks As New DataSet
 
     Sub getCOFFBy(CustomerCode As String, SupplierCode As String, HaulierCode As String,
                   SiteAddress As String, AckAddress As String, InvAddress As String,
@@ -58,9 +59,10 @@ Public Class cCallOffs
 
         Dim SQLConnn As New cADOConnections
 
-        SQL = "SELECT DISTINCT coff_no, branch FROM coff_line"
+        SQL = "SELECT DISTINCT coff_line.coff_no, coff_line.branch, coff_header.date_tm_rev"
+        SQL = SQL & " FROM coff_line INNER JOIN coff_header ON coff_line.branch = coff_header.branch AND coff_line.coff_no = coff_header.coff_no"
         SQL = SQL & " WHERE orderno = '" & OrderNo & "'"
-        SQL = SQL & " ORDER BY coff_no"
+        SQL = SQL & " ORDER BY coff_header.date_tm_rev"
 
         'MessageBox.Show(SQL)
         Dim connection As New SqlConnection(SQLConnn.TMBInvConnectionString)
@@ -104,6 +106,28 @@ Public Class cCallOffs
         ok = True
     End Sub
 
+    Sub getCOFFWorks(Branch As String, CoffNo As String, Works As String, d_or_e As String)
+        ok = False
+        Dim SQL As String = ""
+
+        Dim SQLConnn As New cADOConnections
+        SQL = "SELECT * from coff_works"
+        SQL = SQL & " WHERE branch = '" & Branch & "'"
+        SQL = SQL & " AND coff_no = " & CoffNo
+        SQL = SQL & " AND works = '" & Works & "'"
+        SQL = SQL & " AND d_or_e = '" & d_or_e & "'"
+
+        Dim connection As New SqlConnection(SQLConnn.TMBInvConnectionString)
+        connection.Open()
+        Dim SQLAdap As New SqlDataAdapter(SQL, connection)
+        connection.Close()
+
+        SQLAdap.Fill(dsCOFFWorks, "COFFWorks")
+
+        If dsCOFFWorks.Tables("COFFWorks").Rows.Count = 0 Then Exit Sub
+
+        ok = True
+    End Sub
 
 End Class
 
@@ -119,9 +143,10 @@ Public Class cCOFFSchedule
     Private _QtyDelivered As String
     Private _DeliveryDate As String
     Private _InvoiceNo As String
+    Private _Status As String
 
     Public Sub New(COFFNo As String, COFFLineNo As String, OrderNo As String, OrderLineNo As String, RequestDateType As String, DateRequested As String, Description As String,
-                   QtyRequested As String, QtyDelivered As String, DeliveryDate As String, InvoiceNo As String)
+                   QtyRequested As String, QtyDelivered As String, DeliveryDate As String, InvoiceNo As String, Status As String)
         Me.COFFNo = COFFNo
         Me.COFFLineNo = COFFLineNo
         Me.OrderNo = OrderNo
@@ -133,8 +158,17 @@ Public Class cCOFFSchedule
         Me.QtyDelivered = QtyDelivered
         Me.DeliveryDate = DeliveryDate
         Me.InvoiceNo = InvoiceNo
-
+        Me._Status = Status
     End Sub
+
+    Public Property Status
+        Get
+            Return _Status
+        End Get
+        Set(value)
+            _Status = value
+        End Set
+    End Property
 
     Public Property COFFNo
         Get

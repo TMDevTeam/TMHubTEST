@@ -463,9 +463,11 @@
 
             <Border Background="GhostWhite" BorderBrush="Gainsboro" BorderThickness="1" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="6" Margin="2">
                 <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
 
-                    
-                        <DataGrid Grid.Row ="0" Grid.ColumnSpan="9" Name="grdOrderLines" AutoGenerateColumns="false" IsReadOnly="True" >
+                    <DataGrid  Name="grdOrderLines" AutoGenerateColumns="false" IsReadOnly="True" >
                     <DataGrid.Resources>
                          <!--This is for text wrapping -->
                         <Style x:Key="wordWrapStyle" TargetType="{x:Type TextBlock}">
@@ -623,8 +625,11 @@
         <Border Background="GhostWhite" BorderBrush="Gainsboro" BorderThickness="1" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="6" Margin="2">
 
             <Expander Name="expDeliverSchedule" Header="Deliver Schedule" IsExpanded="True" >
-                <Grid>
-                    <DataGrid Grid.ColumnSpan="9" Name="grdDeliverSchedule" AutoGenerateColumns="false" IsReadOnly="True" >
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
+                    <DataGrid Name="grdDeliverSchedule" AutoGenerateColumns="false" IsReadOnly="True" >
                         <DataGrid.Resources>
                             <!--This is for text wrapping -->
                             <Style x:Key="wordWrapStyle" TargetType="{x:Type TextBlock}">
@@ -636,7 +641,8 @@
                             <DataGridTextColumn Binding="{Binding COFFNo}" ElementStyle="{StaticResource wordWrapStyle}" HeaderStyle="{StaticResource WrappedColumnHeaderStyle}" Header="Call Off No"/>
                             <DataGridTextColumn Binding="{Binding COFFLineNo, StringFormat={}{0:n0}}" ElementStyle="{StaticResource wordWrapStyle}" HeaderStyle="{StaticResource WrappedColumnHeaderStyle}" Header="Line No"/>
                             <DataGridTextColumn Binding="{Binding OrderNo}" ElementStyle="{StaticResource wordWrapStyle}" HeaderStyle="{StaticResource WrappedColumnHeaderStyle}" Header="Order No"/>
-                            <DataGridTemplateColumn Header="Date Requested">
+                            
+                            <!--<DataGridTemplateColumn Header="Date Requested">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding DateRequested}" />
@@ -647,8 +653,11 @@
                                         <DatePicker SelectedDate="{Binding DateRequested}" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellEditingTemplate>
-                            </DataGridTemplateColumn>
-                            <DataGridTextColumn Binding="{Binding Description, StringFormat={}{0:n0}}" ElementStyle="{StaticResource wordWrapStyle}" HeaderStyle="{StaticResource WrappedColumnHeaderStyle}" Header="Description"/>
+                            </DataGridTemplateColumn>-->
+                            <DataGridTextColumn Binding="{Binding Description}" ElementStyle="{StaticResource wordWrapStyle}" HeaderStyle="{StaticResource WrappedColumnHeaderStyle}" Header="Description"/>
+                            <DataGridTextColumn Binding="{Binding Status}" ElementStyle="{StaticResource wordWrapStyle}" HeaderStyle="{StaticResource WrappedColumnHeaderStyle}" Header="Status"/>
+                            <DataGridTextColumn Binding="{Binding RequestDateType}" ElementStyle="{StaticResource wordWrapStyle}" HeaderStyle="{StaticResource WrappedColumnHeaderStyle}" Header=" "/>
+                            <DataGridTextColumn Binding="{Binding DateRequested}" ElementStyle="{StaticResource wordWrapStyle}" HeaderStyle="{StaticResource WrappedColumnHeaderStyle}" Header="Date Requested"/>
                             <DataGridTextColumn Binding="{Binding QtyRequested, StringFormat={}{0:n0}}" ElementStyle="{StaticResource wordWrapStyle}" HeaderStyle="{StaticResource WrappedColumnHeaderStyle}" Header="Quantity Requested"/>
                             <DataGridTextColumn Binding="{Binding QtyDelivered}" ElementStyle="{StaticResource wordWrapStyle}" HeaderStyle="{StaticResource WrappedColumnHeaderStyle}" Header="Quantity Delivered"/>
                             <DataGridTextColumn Binding="{Binding DeliveryDate}" ElementStyle="{StaticResource wordWrapStyle}" HeaderStyle="{StaticResource WrappedColumnHeaderStyle}" Header="Delivery Date"/>

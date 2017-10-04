@@ -19,6 +19,9 @@ Class wpfOrders
     End Sub
 
     Sub DisplayCOFFSchedule(OrderNo As String)
+
+        grdDeliverSchedule.ItemsSource = ""
+
         Dim DisplayCOFFSched As New cCallOffs
         Call DisplayCOFFSched.getCOFFByOrderNo(OrderNo)
         If DisplayCOFFSched.ok = False Then Exit Sub
@@ -41,11 +44,81 @@ Class wpfOrders
                         'COFF NO
                         Dim COFFNo As String = "C" & .Rows(j)("coff_no") ' & "-" & Trim(rsCoffLine!coff_suffix)
 
-                        ''STATUS
+                        'DESCRIPTION
+                        Dim Description As String = ""
+                        Dim DisplayOrderLines As New cOrders
+                        DisplayOrderLines.getOrderLines(.Rows(j)("orderno"), .Rows(j)("line"))
+                        If DisplayOrderLines.ok = True Then
+                            With DisplayOrderLines.dsOrderLines.Tables(0)
+                                Description = .Rows(0)("description1").ToString.Trim
+                                If .Rows(0)("description2").ToString.Trim <> "" Then
+                                    Description += Environment.NewLine + .Rows(0)("description2").ToString.Trim
+                                End If
+                                If .Rows(0)("description3").ToString.Trim <> "" Then
+                                    Description += Environment.NewLine + .Rows(0)("description3").ToString.Trim
+                                End If
+                            End With
+                        End If
 
-                        ''QTY CALLED OFF
+                        'STATUS
+                        Dim Status As String = ""
+                        Dim StatusSupplier As String = ""
+                        Dim StatusHaulier As String = ""
+                        Dim StatusDelNote As String = ""
+                        ' Has this call off line been invoiced ?
+                        If .Rows(j)("invoiced") Then
+                            StatusSupplier = "Delivered, Advice = " & .Rows(j)("advice")
+                            GoTo Displaystatus
+                        End If
 
-                        Dim QtyCalledOff = .Rows(j)("qty_current")
+                        ' Has this line been cancelled ?
+                        If .Rows(j)("id_tm_cancel").ToString.Trim.Length > 0 Then
+                            StatusSupplier = "CANCELLED : " & .Rows(j)("id_cust_cancel")
+                            GoTo DisplayStatus
+                        End If
+
+                        Call DisplayCOFFSched.getCOFFWorks(.Rows(j)("branch"), .Rows(j)("coff_no"), .Rows(j)("works"), .Rows(j)("d_or_e"))
+                        If DisplayCOFFSched.ok = False Then
+                            StatusSupplier = "No works record found"
+                            StatusHaulier = "."
+                            GoTo Displaystatus
+                        End If
+
+
+                        ' set up decsription text for an ordinary line
+                        'Supplier status
+                        StatusSupplier = "Supplier needs faxing "
+                        If DisplayCOFFSched.dsCOFFWorks.Tables("COFFWorks").Rows(0)("id_tm_supp_fax").ToString.Trim.Length > 0 Then
+                            StatusSupplier = "Supplier faxed "
+                        End If
+                        If DisplayCOFFSched.dsCOFFWorks.Tables("COFFWorks").Rows(0)("id_tm_supp_conf").ToString.Trim.Length > 0 Then
+                            StatusSupplier = "Supplier Confirmed "
+                        End If
+
+
+                        'Haulier
+                        StatusHaulier = "(no haulier)"
+                        If DisplayCOFFSched.dsCOFFWorks.Tables("COFFWorks").Rows(0)("haulier").ToString.Trim = "WORKS" Then GoTo DisplayStatus
+                        If DisplayCOFFSched.dsCOFFWorks.Tables("COFFWorks").Rows(0)("haulier").ToString.Trim = "COLLECTED" Then GoTo DisplayStatus
+
+                        StatusHaulier = "Haulier needs fax"
+                        If DisplayCOFFSched.dsCOFFWorks.Tables("COFFWorks").Rows(0)("id_tm_haul_fax").ToString.Trim.Length > 0 Then
+                            StatusHaulier = "Haulier faxed"
+                        End If
+                        If DisplayCOFFSched.dsCOFFWorks.Tables("COFFWorks").Rows(0)("id_tm_haul_conf").ToString.Trim.Length > 0 Then
+                            StatusHaulier = "Haulier Confirmed"
+                        End If
+
+                        ' Delivery Note
+                        If DisplayCOFFSched.dsCOFFWorks.Tables("COFFWorks").Rows(0)("id_tm_part_load").ToString.Trim.Length > 0 Then
+                            StatusDelNote = ", Deliv/Note " & Format(DisplayCOFFSched.dsCOFFWorks.Tables("COFFWorks").Rows(0)("date_part_load"), "dd/MM/yyyy")
+                        End If
+DisplayStatus:
+
+                        Status = StatusSupplier & " " & StatusHaulier & " " & StatusDelNote
+
+                        'QTY CALLED OFF
+                        Dim QtyCalledOff = Format(.Rows(j)("qty_current"), "0")
 
 
                         ''TotalCallOff = TotalCallOff + CCur(LlunNo(rsCoffLine!qty_current))
@@ -76,7 +149,7 @@ Class wpfOrders
                         If IsDBNull(.Rows(j)("qty_invoiced")) Then
                             QtyDelivered = 0
                         Else
-                            QtyDelivered = .Rows(j)("qty_invoiced")
+                            QtyDelivered = Format(.Rows(j)("qty_invoiced"), "0")
                         End If
 
 
@@ -87,7 +160,7 @@ Class wpfOrders
                         'CUSTOMER COFF NO
 
                         COFFLines.Add(New cCOFFSchedule(COFFNo, .Rows(j)("coff_suffix"), .Rows(j)("orderno"), .Rows(j)("line"), .Rows(j)("xdate_tm_rev"), DateRequested,
-                                                        "", QtyCalledOff, QtyDelivered, DateDelivered, InvoiceNo))
+                                                        Description, QtyCalledOff, QtyDelivered, DateDelivered, InvoiceNo, Status))
                     Next
 
                 End With
@@ -101,8 +174,11 @@ NextCOFF:
     End Sub
 
     Sub DisplayOrderLines(OrderNo As String)
+
+        grdOrderLines.ItemsSource = ""
+
         Dim DisplayOrderLines As New cOrders
-        DisplayOrderLines.getOrderLines(OrderNo)
+        DisplayOrderLines.getOrderLines(OrderNo, "*")
         'grdOrderLines.ItemsSource = DisplayOrderLines.dsOrderLines.Tables(0).DefaultView
 
         Dim OrderLines As New List(Of cOrderLines)
