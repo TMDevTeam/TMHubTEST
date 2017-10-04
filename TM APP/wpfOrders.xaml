@@ -627,7 +627,7 @@
             <Expander Name="expDeliverSchedule" Header="Deliver Schedule" IsExpanded="True" >
                 <Grid >
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <DataGrid Name="grdDeliverSchedule" AutoGenerateColumns="false" IsReadOnly="True" >
                         <DataGrid.Resources>
